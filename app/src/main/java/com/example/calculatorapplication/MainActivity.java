@@ -35,12 +35,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onClickDot(View view){
+        if (resultTextView.getText().toString().equals("")){
+            resultTextView.setText("0.");
+        }
+        else if (!resultTextView.getText().toString().matches("^\\d+\\.\\d+")){
+            resultTextView.append(".");
+        }
+    }
+
     public void onClickOperator(View view) {
         Button button = (Button) view;
+        if (button.getText().toString().equals("√")){
+            resultTextView.setText(String.valueOf(Math.sqrt(Double.parseDouble(resultTextView.getText().toString()))));
+            return;
+        }
         if (operator.isEmpty()) {
             lhs = resultTextView.getText().toString();
-        } else {
-            lhs = calculate().toString();
+        } else{
+            lhs = String.valueOf(calculate());
         }
         operator = button.getText().toString();
         smallTextView.setText(lhs + " " + operator + " ");
