@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickOperator(View view) {
         Button button = (Button) view;
-        if (resultTextView.getText().toString().indexOf('.') == resultTextView.getText().toString().length() - 1) {
-            resultTextView.setText(resultTextView.getText().toString().substring(0, resultTextView.getText().toString().indexOf('.')));
+        if (String.valueOf(resultTextView.getText().toString().indexOf('.')).equals(resultTextView.getText().length()-1)){
+            resultTextView.setText(resultTextView.getText().toString().substring(0,resultTextView.getText().toString().indexOf('.')));
         }
         if (button.getText().toString().equals("√")) {
             resultTextView.setText(String.valueOf(Math.sqrt(Double.parseDouble(resultTextView.getText().toString()))));
@@ -98,9 +98,7 @@ public class MainActivity extends AppCompatActivity {
         if (lhs.isEmpty()) {
             return 0.0;
         }
-        if (resultTextView.getText().toString().isEmpty() || resultTextView.getText().toString().equals("=") ||
-                resultTextView.getText().toString().equals("+") || resultTextView.getText().toString().equals("-") ||
-                resultTextView.getText().toString().equals("/") || resultTextView.getText().toString().equals("x")) {
+        if (resultTextView.getText().toString().isEmpty()) {
             return Double.parseDouble(lhs);
         }
 
