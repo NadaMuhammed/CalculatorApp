@@ -35,24 +35,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickDot(View view){
-        if (resultTextView.getText().toString().equals("")){
+    public void onClickDot(View view) {
+        if (resultTextView.getText().toString().equals("")) {
             resultTextView.setText("0.");
-        }
-        else if (!resultTextView.getText().toString().matches("^\\d+\\.\\d+")){
+        } else if (!resultTextView.getText().toString().matches("^\\d+\\.\\d+")) {
             resultTextView.append(".");
         }
     }
 
     public void onClickOperator(View view) {
         Button button = (Button) view;
-        if (button.getText().toString().equals("√")){
+        if (resultTextView.getText().toString().indexOf('.') == resultTextView.getText().toString().length() - 1) {
+            resultTextView.setText(resultTextView.getText().toString().substring(0, resultTextView.getText().toString().indexOf('.')));
+        }
+        if (button.getText().toString().equals("√")) {
             resultTextView.setText(String.valueOf(Math.sqrt(Double.parseDouble(resultTextView.getText().toString()))));
             return;
         }
         if (operator.isEmpty()) {
             lhs = resultTextView.getText().toString();
-        } else{
+        } else {
             lhs = String.valueOf(calculate());
         }
         operator = button.getText().toString();
@@ -86,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
         smallTextView.setText("");
         lhs = "";
         operator = "";
+    }
+
+    public void onClickDelete(View view){
+        resultTextView.setText(resultTextView.getText().toString().substring(0, resultTextView.getText().toString().length()-1));
     }
 
     public Double calculate() {
